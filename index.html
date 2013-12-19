@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>pxToCm</title>
+	<style>
+		* {
+			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+			-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+			box-sizing: border-box;         /* Opera/IE 8+ */			
+		}
+
+		body {
+			margin: 0;
+			padding: 20px;
+			font: normal 13px/100% Verdana, Tahoma, sans-serif;
+		}
+
+		input { 
+			padding: 9px;
+			border: solid 1px #E5E5E5;
+			outline: 0;
+			width: 100%;
+			background: #FFFFFF;
+		}
+		 
+		input:hover, textarea:hover,
+		input:focus, textarea:focus { 
+			border-color: #C9C9C9; 
+		}
+		 
+		label {
+			display: block;
+			margin-top: 10px; 
+			color: #999999; 
+		}
+
+		#result {
+			margin-top: 100px;
+			text-align: center;
+			font-size: 20px;
+		}
+
+	</style>
+</head>
+<body>
+	<label>Pixel</label>
+	<input type="text" id="px" placeholder="px" />
+	<label>CM</label>
+	<input type="text" id="cm" placeholder="cm" />
+	<label>DPI</label>
+	<input type="text" id="dpi" placeholder="dpi" value="72" /> 
+
+	<div id="result"></div>
+
+	<script src="jquery-1.10.2.min.js"></script>
+
+	
+	<script>
+		$('#px').bind("change paste keyup", function(){
+			$uzunluk = $(this).val();
+			$dpi = $('#dpi').val();
+
+			cm = ($uzunluk / 0.393700787 / $dpi);
+			cm = Number((cm).toFixed(2))
+
+			$('#cm').val(cm);
+			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
+
+		});
+
+		$('#cm').bind("change paste keyup", function(){
+			$uzunluk = $(this).val();
+			$dpi = $('#dpi').val();
+
+			cm = Math.round($uzunluk * 0.393700787 * $dpi);
+
+			$('#px').val(cm);
+			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
+
+		});
+
+
+		$('#dpi').bind("change paste keyup", function(){
+			$uzunluk = $('#px').val();
+			$dpi = $(this).val();
+
+			cm = ($uzunluk / 0.393700787 / $dpi);
+			cm = Number((cm).toFixed(2))
+
+			$('#cm').val(cm);
+			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
+		});		
+
+
+	</script>
+</body>
+</html>
