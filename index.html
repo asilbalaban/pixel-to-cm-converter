@@ -59,24 +59,40 @@
 	<script>
 		$('#px').bind("change paste keyup", function(){
 			$uzunluk = $(this).val();
+
+			if ($uzunluk.match("px$")) {
+			   $uzunluk = $uzunluk.substring(0, $uzunluk.length - 2);
+			   console.log($uzunluk);
+			}
+
 			$dpi = $('#dpi').val();
 
 			cm = ($uzunluk / 0.393700787 / $dpi);
 			cm = Number((cm).toFixed(2))
 
-			$('#cm').val(cm);
+
+
+			$('#cm').val(cm + 'cm');
 			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
 
 		});
 
 		$('#cm').bind("change paste keyup", function(){
 			$uzunluk = $(this).val();
+
+			if ($uzunluk.match("cm$")) {
+			   $uzunluk = $uzunluk.substring(0, $uzunluk.length - 2);
+			   console.log($uzunluk);
+			}
+
+
+
 			$dpi = $('#dpi').val();
 
 			cm = Math.round($uzunluk * 0.393700787 * $dpi);
 
-			$('#px').val(cm);
-			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
+			$('#px').val(cm + 'px');
+			$('#result').html("<strong>"+$uzunluk+"cm</strong> = <strong>"+cm+"px</strong> on <strong>"+$dpi+'dpi</strong>');
 
 		});
 
@@ -88,11 +104,13 @@
 			cm = ($uzunluk / 0.393700787 / $dpi);
 			cm = Number((cm).toFixed(2))
 
-			$('#cm').val(cm);
+			$('#cm').val(cm + 'cm');
 			$('#result').html("<strong>"+$uzunluk+"px</strong> = <strong>"+cm+"cm</strong> on <strong>"+$dpi+'dpi</strong>');
-		});		
+		});	
+
 
 
 	</script>
+
 </body>
 </html>
